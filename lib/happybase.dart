@@ -1,5 +1,5 @@
 library happybase;
 
-export 'base/scope.dart';
-export 'base/pages.dart';
-export 'base/https.dart';
+export 'core/scope.dart';
+export 'core/pages.dart';
+export 'core/https.dart';
