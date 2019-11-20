@@ -48,7 +48,7 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
         );
     }
 
-    void updateConstant(_BackgroundBundle bundle) {
+    void updateConstant(BackgroundBundle bundle) {
         if(bundle != null) {
             scope.dispatchSpecifiedMessage(_PageScopeId.Background, _PageScopeId.Background, bundle);
         }

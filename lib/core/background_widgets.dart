@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
 
-class _BackgroundBundle {
-    const _BackgroundBundle({this.bgColor});
+class BackgroundBundle {
+    const BackgroundBundle({this.bgColor});
 	final Color bgColor;
 }
 
@@ -16,14 +16,14 @@ class _Background extends ScopeWidget {
 
 class __BackgroundState extends GeneralScopeState<_Background> {
 	__BackgroundState.create(Scope parentScope) : super.create(parentScope, scopeId: _PageScopeId.Background);
-	_BackgroundBundle _bundle;
+	BackgroundBundle _bundle;
 
 	@override
 	void initState() {
 		super.initState();
-		_bundle = scope.getStoredData(_PageScopeId.Background, fromParentIfNotExist: true) ?? _BackgroundBundle();
+		_bundle = scope.getStoredData(_PageScopeId.Background, fromParentIfNotExist: true) ?? BackgroundBundle();
 		scope.registerMessageCallback(_PageScopeId.Background, (data) async {
-			if(data is _BackgroundBundle) {
+			if(data is BackgroundBundle) {
 				scope.postActiveDelayMessage(_PageScopeId.Background, data);
 			}
 		});
