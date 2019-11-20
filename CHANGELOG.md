@@ -9,3 +9,7 @@
 ## 0.0.3
 
 - 外显 BackgroundBundle
+
+## 0.0.4
+
+- 提升 quicklibs 版本至 1.1.9
