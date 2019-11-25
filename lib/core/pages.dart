@@ -13,7 +13,6 @@ abstract class Page extends ScopeWidget {
     Page(this.name);
     final String name;
 
-
     void show(BuildContext context) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => this));
     }

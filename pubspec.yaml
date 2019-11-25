@@ -13,6 +13,7 @@ dependencies:
 
   quicklibs: ^1.1.9
   happypass: ^1.0.1
+  taskpipeline: ^0.0.1
 
 dev_dependencies:
   flutter_test:
