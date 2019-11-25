@@ -13,3 +13,7 @@
 ## 0.0.4
 
 - 提升 quicklibs 版本至 1.1.9
+
+## 0.0.5
+
+- 外显 taskpipeline
