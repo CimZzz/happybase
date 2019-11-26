@@ -49,7 +49,7 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
         return PageThemeWidget (
             _themeBundle,
             child: _BackgroundWidget(
-                builder: createChild,
+                child: createChild(context),
             ),
         );
     }
