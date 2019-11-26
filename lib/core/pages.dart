@@ -10,6 +10,51 @@ enum PageScopeMessageKey {
     Theme,
 }
 
+class PageRoot extends StatefulWidget {
+    PageRoot({Key key, this.child, this.theme = ThemeBundle.defaultTheme}): super(key: key);
+    final Widget child;
+    final ThemeBundle theme;
+
+    @override
+    _PageRootState createState() => _PageRootState();
+}
+
+class _PageRootState extends State<PageRoot> {
+    Scope get scope => Scope.rootScope;
+
+    ThemeBundle _themeBundle;
+
+    @override
+    void initState() {
+        super.initState();
+        _themeBundle = widget.theme;
+        scope.registerActiveDelayCallback(onReceiverActiveDelayMessage);
+    }
+
+    void onReceiverActiveDelayMessage(Map<dynamic, dynamic> activeMessageMap) {
+        var isUpdated = false;
+        final themeBundle = castTo<ThemeBundle>(activeMessageMap.containsKey(PageScopeMessageKey.Theme));
+        if(themeBundle != null) {
+            isUpdated = true;
+            _themeBundle = _themeBundle.and(themeBundle);
+        }
+
+        if(isUpdated) {
+            setState(() {});
+        }
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return PageThemeWidget (
+            _themeBundle,
+            child: widget.child,
+        );
+    }
+}
+
+
+
 
 abstract class Page extends ScopeWidget {
     Page(this.name);
@@ -29,13 +74,6 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
     void initState() {
         super.initState();
         PageManager._addPageContext(this);
-        scope.registerMessageCallback(PageScopeMessageKey.Theme, (data) async {
-            if(data is ThemeBundle) {
-                scope.proxySync(() {
-                    updateConstant(data);
-                });
-            }
-        });
     }
 
     @override
@@ -46,15 +84,15 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
 
     @override
     Widget build(BuildContext context) {
-        return PageThemeWidget (
-            _themeBundle,
-            child: _BackgroundWidget(
-                child: createChild(context),
-            ),
+        return Stack(
+            children: <Widget>[
+                _BackgroundWidget(),
+                createChild(context)
+            ],
         );
     }
 
-    void updateConstant(ThemeBundle bundle) {
+    void updateTheme(ThemeBundle bundle) {
         setState(() {
             _themeBundle = _themeBundle.and(bundle);
         });

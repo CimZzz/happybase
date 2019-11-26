@@ -4,8 +4,9 @@ enum ThemeKey {
 	BgColor,
 }
 
+
 class ThemeBundle {
-    ThemeBundle({this.bgColor});
+    const ThemeBundle({this.bgColor});
     ThemeBundle and(ThemeBundle otherBundle) {
     	if(otherBundle == null) {
     		return otherBundle;
@@ -15,6 +16,9 @@ class ThemeBundle {
 		    bgColor: otherBundle.bgColor ?? this.bgColor
 	    );
     }
+
+    static const ThemeBundle defaultTheme = const ThemeBundle();
+
 	final Color bgColor;
 }
 
