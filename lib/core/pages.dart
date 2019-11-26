@@ -45,7 +45,7 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
     }
 
     @override
-    Widget createChild(BuildContext context) {
+    Widget build(BuildContext context) {
         return PageThemeWidget (
             _themeBundle,
             child: _BackgroundWidget(

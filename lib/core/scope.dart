@@ -80,7 +80,6 @@ abstract class ScopeState<WidgetType extends ScopeWidget, ScopeType extends Scop
     }
 
     @override
-    @mustCallSuper
     Widget build(BuildContext context) {
         return createChild(context);
     }
