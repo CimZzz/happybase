@@ -4,7 +4,6 @@ import 'scope.dart';
 
 part 'pages_manager.dart';
 part 'theme_widgets.dart';
-part 'background_widgets.dart';
 
 enum PageScopeMessageKey {
     Theme,
@@ -46,7 +45,7 @@ class _PageRootState extends State<PageRoot> {
 
     @override
     Widget build(BuildContext context) {
-        return PageThemeWidget (
+        return PageTheme (
             _themeBundle,
             child: widget.child,
         );
@@ -84,12 +83,7 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
 
     @override
     Widget build(BuildContext context) {
-        return Stack(
-            children: <Widget>[
-                _BackgroundWidget(),
-                createChild(context)
-            ],
-        );
+        return createChild(context);
     }
 
     void updateTheme(ThemeBundle bundle) {
