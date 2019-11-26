@@ -7,7 +7,6 @@ class _BackgroundWidget extends StatefulWidget {
 	_BackgroundState createState() {
 		return _BackgroundState();
 	}
-
 }
 
 class _BackgroundState extends State<_BackgroundWidget> {

@@ -33,7 +33,7 @@ class _PageRootState extends State<PageRoot> {
 
     void onReceiverActiveDelayMessage(Map<dynamic, dynamic> activeMessageMap) {
         var isUpdated = false;
-        final themeBundle = castTo<ThemeBundle>(activeMessageMap.containsKey(PageScopeMessageKey.Theme));
+        final themeBundle = castTo<ThemeBundle>(activeMessageMap[PageScopeMessageKey.Theme]);
         if(themeBundle != null) {
             isUpdated = true;
             _themeBundle = _themeBundle.and(themeBundle);
