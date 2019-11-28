@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:taskpipeline/taskpipeline.dart';
 import 'package:quicklibs/quicklibs.dart';
 import 'scope.dart';
 
 part 'pages_manager.dart';
 part 'theme_widgets.dart';
+part 'page_work.dart';
 
 enum PageScopeMessageKey {
     Theme,
@@ -53,6 +55,12 @@ class _PageRootState extends State<PageRoot> {
 }
 
 
+mixin PageInterface {
+    TaskPipeline get taskPipeline;
+    GeneralScope get scope;
+    void updateTheme(ThemeBundle bundle);
+    void updateWidget();
+}
 
 
 abstract class Page extends ScopeWidget {
@@ -65,7 +73,12 @@ abstract class Page extends ScopeWidget {
 }
 
 abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeState<WidgetType> {
-    PageState.create(Scope parentScope) : super.create(parentScope);
+    PageState.create(Scope parentScope, {PageWork pageWork}) : this._pageWork = pageWork, super.create(parentScope);
+
+    TaskPipeline _taskPipeline;
+    TaskPipeline get taskPipeline => this._taskPipeline ??= TaskPipeline();
+
+    PageWork _pageWork;
 
     ThemeBundle _themeBundle = ThemeBundle();
 
@@ -73,12 +86,15 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
     void initState() {
         super.initState();
         PageManager._addPageContext(this);
+        _pageWork?.init();
     }
 
     @override
     void dispose() {
         super.dispose();
         PageManager._removePageContext(this);
+        _taskPipeline?.destroy();
+        _pageWork?.destroy();
     }
 
     @override
@@ -87,8 +103,16 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
     }
 
     void updateTheme(ThemeBundle bundle) {
-        setState(() {
-            _themeBundle = _themeBundle.and(bundle);
+        scope.proxySync(() {
+            setState(() {
+                _themeBundle = _themeBundle.and(bundle);
+            });
+        });
+    }
+
+    void updateWidget() {
+        scope.proxySync(() {
+            setState((){});
         });
     }
 }
