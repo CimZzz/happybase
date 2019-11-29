@@ -73,12 +73,15 @@ abstract class Page extends ScopeWidget {
 }
 
 abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeState<WidgetType> {
-    PageState.create(Scope parentScope, {PageWork pageWork}) : this._pageWork = pageWork, super.create(parentScope);
+    PageState.create(Scope parentScope) : super.create(parentScope);
 
     TaskPipeline _taskPipeline;
     TaskPipeline get taskPipeline => this._taskPipeline ??= TaskPipeline();
 
     PageWork _pageWork;
+    PageWork get pageWork {
+        return this._pageWork ?? createPageWork();
+    }
 
     ThemeBundle _themeBundle = ThemeBundle();
 
@@ -86,7 +89,7 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
     void initState() {
         super.initState();
         PageManager._addPageContext(this);
-        _pageWork?.init();
+        pageWork?.init();
     }
 
     @override
@@ -94,12 +97,16 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
         super.dispose();
         PageManager._removePageContext(this);
         _taskPipeline?.destroy();
-        _pageWork?.destroy();
+        pageWork?.destroy();
     }
 
     @override
     Widget build(BuildContext context) {
         return createChild(context);
+    }
+
+    PageWork createPageWork() {
+        return null;
     }
 
     void updateTheme(ThemeBundle bundle) {
