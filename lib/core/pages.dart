@@ -17,8 +17,7 @@ mixin PageInterface {
     GeneralScope get scope;
     void updateTheme(ThemeBundle bundle);
     void updateWidget();
-    Future<T> showDialog<T>({
-        @required BuildContext context,
+    Future<T> showPageDialog<T>({
         bool barrierDismissible = true,
         WidgetBuilder builder,
     });
@@ -85,15 +84,14 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
         });
     }
 
-    Future<T> showDialog<T>({
-        @required BuildContext context,
+    Future<T> showPageDialog<T>({
         bool barrierDismissible = true,
         WidgetBuilder builder,
     }) {
         return scope.proxyAsync(() {
             return taskPipeline.execInnerTask(
                 leafExec: () => showDialog<T>(
-                    context: context,
+                    context: this.context,
                     barrierDismissible: barrierDismissible,
                     builder: builder
                 )
