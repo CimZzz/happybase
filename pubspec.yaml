@@ -1,6 +1,6 @@
 name: happybase
 description: base on quicklibs & happypass & taskpipeline! happy base, happy every day
-version: 0.1.5
+version: 0.1.6
 homepage: https://github.com/CimZzz/happybase
 author: wangyanxiong <a1950207@gmail.com>
 
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   quicklibs: ^1.1.9
-  happypass: ^1.0.1
+  happypass: ^1.0.2
   taskpipeline: ^0.0.1
 
 dev_dependencies:
