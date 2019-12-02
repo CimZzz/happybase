@@ -58,4 +58,14 @@ class PageManager {
 		Navigator.popUntil(existContext, modalRoute);
 		Navigator.pop(existContext);
 	}
+	
+	
+	static void replace<T>(Page page, [BuildContext context]) {
+		final existContext = context ?? _rootPageContext;
+		if(existContext == null) {
+			return null;
+		}
+		
+		Navigator.pushReplacement(existContext, MaterialPageRoute<T>(builder: (context) => page, settings: RouteSettings(name: page.name)));
+	}
 }

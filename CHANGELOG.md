@@ -73,3 +73,7 @@
 ## 0.1.9
 
 - 提升 taskpipeline 版本至 0.0.2
+
+## 0.2.0
+
+- PageManager 新增替换页面方法
