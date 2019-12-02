@@ -21,6 +21,7 @@ mixin PageInterface {
         bool barrierDismissible = true,
         WidgetBuilder builder,
     });
+    void backPage();
 }
 
 
@@ -33,7 +34,7 @@ abstract class Page extends ScopeWidget {
     }
 }
 
-abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeState<WidgetType> {
+abstract class PageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
     PageState.create(Scope parentScope) : super.create(parentScope);
 
     TaskPipeline _taskPipeline;
@@ -96,6 +97,12 @@ abstract class PageState<WidgetType extends ScopeWidget> extends GeneralScopeSta
                     builder: builder
                 )
             );
+        });
+    }
+    
+    void backPage() {
+        scope.proxySync((){
+            PageManager.popUntil(this.widget.name, this.context);
         });
     }
 }
