@@ -1,3 +1,3 @@
-library quicklibs;
+library taskpipeline;
 
 export 'package:taskpipeline/taskpipeline.dart';
