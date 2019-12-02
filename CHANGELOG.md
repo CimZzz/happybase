@@ -81,3 +81,7 @@
 ## 0.2.1
 
 - PageInterface 新增获取 BuildContext 方法
+
+## 0.2.2
+
+- PageWork 不强制实现 destroy 方法

@@ -11,5 +11,7 @@ abstract class PageWork<T extends PageInterface> {
 	BuildContext get context => pageInterface.context;
 
 	void init();
-	void destroy();
+	void destroy() {
+	
+	}
 }
