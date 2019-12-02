@@ -15,6 +15,7 @@ enum PageScopeMessageKey {
 mixin PageInterface {
     TaskPipeline get taskPipeline;
     GeneralScope get scope;
+    BuildContext get context;
     void updateTheme(ThemeBundle bundle);
     void updateWidget();
     Future<T> showPageDialog<T>({

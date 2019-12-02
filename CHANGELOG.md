@@ -77,3 +77,7 @@
 ## 0.2.0
 
 - PageManager 新增替换页面方法
+
+## 0.2.1
+
+- PageInterface 新增获取 BuildContext 方法

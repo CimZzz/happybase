@@ -8,6 +8,7 @@ abstract class PageWork<T extends PageInterface> {
 
 	Scope get scope => pageInterface.scope;
 	TaskPipeline get taskPipeline => pageInterface.taskPipeline;
+	BuildContext get context => pageInterface.context;
 
 	void init();
 	void destroy();
