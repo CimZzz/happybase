@@ -89,3 +89,7 @@
 ## 0.2.3
 
 - 新增 InnerPageState 实现内嵌页面功能
+
+## 0.2.4
+
+- 修改 PageState 未继承 Bug

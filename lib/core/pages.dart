@@ -109,7 +109,7 @@ abstract class InnerPageState<WidgetType extends Page> extends GeneralScopeState
     }
 }
 
-abstract class PageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
+abstract class PageState<WidgetType extends Page> extends InnerPageState<WidgetType> {
     PageState.create(Scope parentScope) : super.create(parentScope);
 
     @override
