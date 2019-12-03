@@ -85,3 +85,7 @@
 ## 0.2.2
 
 - PageWork 不强制实现 destroy 方法
+
+## 0.2.3
+
+- 新增 InnerPageState 实现内嵌页面功能

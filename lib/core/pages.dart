@@ -35,8 +35,9 @@ abstract class Page extends ScopeWidget {
     }
 }
 
-abstract class PageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
-    PageState.create(Scope parentScope) : super.create(parentScope);
+
+abstract class InnerPageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
+    InnerPageState.create(Scope parentScope) : super.create(parentScope);
 
     TaskPipeline _taskPipeline;
     TaskPipeline get taskPipeline => this._taskPipeline ??= TaskPipeline();
@@ -49,16 +50,16 @@ abstract class PageState<WidgetType extends Page> extends GeneralScopeState<Widg
     ThemeBundle _themeBundle = ThemeBundle();
 
     @override
+    @mustCallSuper
     void initState() {
         super.initState();
-        PageManager._addPageContext(this);
         pageWork?.init();
     }
 
     @override
+    @mustCallSuper
     void dispose() {
         super.dispose();
-        PageManager._removePageContext(this);
         _taskPipeline?.destroy();
         pageWork?.destroy();
     }
@@ -105,6 +106,24 @@ abstract class PageState<WidgetType extends Page> extends GeneralScopeState<Widg
         scope.proxySync((){
             PageManager.popUntil(this.widget.name, this.context);
         });
+    }
+}
+
+abstract class PageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
+    PageState.create(Scope parentScope) : super.create(parentScope);
+
+    @override
+    @mustCallSuper
+    void initState() {
+        PageManager._addPageContext(this);
+        super.initState();
+    }
+
+    @override
+    @mustCallSuper
+    void dispose() {
+        PageManager._removePageContext(this);
+        super.dispose();
     }
 }
 
