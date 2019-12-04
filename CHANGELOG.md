@@ -97,3 +97,7 @@
 ## 0.2.5
 
 - 移除 InnerPageState
+
+## 0.2.6
+
+- 去掉 ScopeWidget 的 createChild 无用方法

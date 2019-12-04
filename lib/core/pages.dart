@@ -66,11 +66,6 @@ abstract class PageState<WidgetType extends Page> extends GeneralScopeState<Widg
         pageWork?.destroy();
     }
 
-    @override
-    Widget build(BuildContext context) {
-        return createChild(context);
-    }
-
     PageWork createPageWork() {
         return null;
     }

@@ -79,13 +79,6 @@ abstract class ScopeState<WidgetType extends ScopeWidget, ScopeType extends Scop
         destroyScope();
     }
 
-    @override
-    Widget build(BuildContext context) {
-        return createChild(context);
-    }
-
-    Widget createChild(BuildContext context);
-
     void postActiveDelayMessage(dynamic key, [dynamic value]) {
         this.scope.postActiveDelayMessage(key, value);
     }
