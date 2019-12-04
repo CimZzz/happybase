@@ -93,3 +93,7 @@
 ## 0.2.4
 
 - 修改 PageState 未继承 Bug
+
+## 0.2.5
+
+- 移除 InnerPageState
