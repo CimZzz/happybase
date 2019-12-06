@@ -101,3 +101,7 @@
 ## 0.2.6
 
 - 去掉 ScopeWidget 的 createChild 无用方法
+
+## 0.2.7
+
+- 提升 happypass 版本至 1.0.3
