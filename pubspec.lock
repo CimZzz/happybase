@@ -73,7 +73,7 @@ packages:
       name: happypass
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   image:
     dependency: transitive
     description:
@@ -169,7 +169,7 @@ packages:
       name: taskpipeline
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.3"
   term_glyph:
     dependency: transitive
     description:
