@@ -1,5 +1,11 @@
 part of 'pages.dart';
 
+
+enum PageScopeMessageKey {
+	Theme,
+}
+
+
 class PageRoot extends StatefulWidget {
 	PageRoot({Key key, this.child, this.theme = ThemeBundle.defaultTheme}): super(key: key);
 	final Widget child;

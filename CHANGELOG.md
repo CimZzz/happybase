@@ -109,3 +109,7 @@
 ## 0.2.8
 
 - 提升 taskpipeline 版本至 0.0.3
+
+## 0.2.9
+
+- 重新增加 InnerPageState，这次不同的是同时新增一个 InnerPage

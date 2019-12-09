@@ -8,36 +8,26 @@ part 'theme_widgets.dart';
 part 'page_work.dart';
 part 'page_root.dart';
 
-enum PageScopeMessageKey {
-    Theme,
-}
-
-mixin PageInterface {
+mixin InnerPageInterface {
     TaskPipeline get taskPipeline;
     GeneralScope get scope;
     BuildContext get context;
-    void updateTheme(ThemeBundle bundle);
     void updateWidget();
     Future<T> showPageDialog<T>({
         bool barrierDismissible = true,
         WidgetBuilder builder,
     });
-    void backPage();
 }
 
+abstract class InnerPage extends ScopeWidget {
+    InnerPage({Key key, Scope parentScope}) : super(key: key, parentScope: parentScope);
 
-abstract class Page extends ScopeWidget {
-    Page(this.name);
-    final String name;
-
-    void show(BuildContext context) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => this));
-    }
+    @override
+    InnerPageState createState();
 }
 
-
-abstract class PageState<WidgetType extends Page> extends GeneralScopeState<WidgetType> {
-    PageState.create(Scope parentScope) : super.create(parentScope);
+abstract class InnerPageState<WidgetType extends InnerPage> extends GeneralScopeState<WidgetType> {
+    InnerPageState.create(Scope parentScope, { String scopeName, dynamic scopeId }) : super.create(parentScope, scopeName: scopeName, scopeId: scopeId);
 
     TaskPipeline _taskPipeline;
     TaskPipeline get taskPipeline => this._taskPipeline ??= TaskPipeline();
@@ -47,35 +37,23 @@ abstract class PageState<WidgetType extends Page> extends GeneralScopeState<Widg
         return this._pageWork ?? createPageWork();
     }
 
-    ThemeBundle _themeBundle = ThemeBundle();
-
     @override
     @mustCallSuper
     void initState() {
-        PageManager._addPageContext(this);
-        super.initState();
         pageWork?.init();
+        super.initState();
     }
 
     @override
     @mustCallSuper
     void dispose() {
-        PageManager._removePageContext(this);
-        super.dispose();
         _taskPipeline?.destroy();
         pageWork?.destroy();
+        super.dispose();
     }
 
     PageWork createPageWork() {
         return null;
-    }
-
-    void updateTheme(ThemeBundle bundle) {
-        scope.proxySync(() {
-            setState(() {
-                _themeBundle = _themeBundle.and(bundle);
-            });
-        });
     }
 
     void updateWidget() {
@@ -97,6 +75,36 @@ abstract class PageState<WidgetType extends Page> extends GeneralScopeState<Widg
                 )
             );
         });
+    }
+}
+
+mixin PageInterface implements InnerPageInterface {
+    void backPage();
+}
+
+abstract class Page extends InnerPage {
+    Page(this.name, {Key key, Scope parentScope}) : super(key: key, parentScope: parentScope);
+    final String name;
+
+    @override
+    PageState createState();
+}
+
+abstract class PageState<WidgetType extends Page> extends InnerPageState<WidgetType> {
+    PageState.create(Scope parentScope, { String scopeName, dynamic scopeId }) : super.create(parentScope, scopeName: scopeName, scopeId: scopeId);
+
+    @override
+    @mustCallSuper
+    void initState() {
+        PageManager._addPageContext(this);
+        super.initState();
+    }
+
+    @override
+    @mustCallSuper
+    void dispose() {
+        PageManager._removePageContext(this);
+        super.dispose();
     }
     
     void backPage() {

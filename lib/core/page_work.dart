@@ -1,7 +1,7 @@
 part of 'pages.dart';
 
 
-abstract class PageWork<T extends PageInterface> {
+abstract class PageWork<T extends InnerPageInterface> {
 	PageWork({this.pageInterface});
 
 	final T pageInterface;
