@@ -113,3 +113,7 @@
 ## 0.2.9
 
 - 重新增加 InnerPageState，这次不同的是同时新增一个 InnerPage
+
+## 0.3.0
+
+- 提升 happypass 版本至 1.0.4
