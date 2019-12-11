@@ -80,6 +80,7 @@ abstract class InnerPageState<WidgetType extends InnerPage> extends GeneralScope
 
 mixin PageInterface implements InnerPageInterface {
     void backPage();
+    void closeDirectly({dynamic result});
 }
 
 abstract class Page extends InnerPage {
@@ -110,6 +111,12 @@ abstract class PageState<WidgetType extends Page> extends InnerPageState<WidgetT
     void backPage() {
         scope.proxySync((){
             PageManager.popUntil(this.widget.name, this.context);
+        });
+    }
+
+    void closeDirectly({dynamic result}) {
+        scope.proxySync((){
+            PageManager.pop(this.context, result);
         });
     }
 }

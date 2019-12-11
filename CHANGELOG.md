@@ -117,3 +117,7 @@
 ## 0.3.0
 
 - 提升 happypass 版本至 1.0.4
+
+## 0.3.1
+
+- PageInterface 新增 closeDirectly 方法
