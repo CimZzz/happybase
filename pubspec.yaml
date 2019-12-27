@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  quicklibs: ^1.2.0
+  quicklibs: ^1.2.0+1
   happypass: ^1.1.0
   taskpipeline: ^0.0.3
 
